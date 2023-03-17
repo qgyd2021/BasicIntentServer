@@ -21,6 +21,7 @@ cmake --build ./cmake-build-debug --target BasicIntentServer -j "$(grep -c ^proc
 
 ./cmake-build-debug/BasicIntentServer
 
+
 gdb -c ./cmake-build-debug/BasicIntentServer
 
 安装 gdb
