@@ -92,7 +92,7 @@ BasicIntent::BasicIntent()
 BasicIntent::~BasicIntent() {
   for (auto it = key_to_model_group_map_.begin(); it != key_to_model_group_map_.end(); ++it) {
     delete it->second;
-    it.second = nullptr;
+    it->second = nullptr;
   }
 }
 
