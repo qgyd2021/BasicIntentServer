@@ -29,6 +29,25 @@ public:
       nlp::FullTokenizer * tokenizer
       ): model_(model), labels_(labels), tokenizer_(tokenizer) {}
 
+  ModelGroup(std::string model_file, std::string labels_file, std::string vocab_file) {
+    //model
+    try{
+      model_ = torch::jit::load(model_file);
+      model_.eval();
+    }
+    catch (const c10::Error &e){
+      std::cout << "error loading the model:\n " << e.what();
+    };
+
+    //labels
+    std::ifstream i_labels(labels_file);
+    i_labels >> labels_;
+
+    //tokenizer
+    tokenizer_ = new nlp::FullTokenizer(vocab_file.c_str(), true);
+
+  };
+
   ~ModelGroup() {
     delete tokenizer_;
     tokenizer_ = nullptr;
@@ -67,24 +86,24 @@ BasicIntent::BasicIntent()
     std::string labels_file = model_path + "/labels.json";
 
     //model
-    torch::jit::script::Module model;
-    try{
-      model = torch::jit::load(model_file);
-      model.eval();
-    }
-    catch (const c10::Error &e){
-      std::cout << "error loading the model:\n " << e.what();
-    };
-
+    //torch::jit::script::Module model;
+    //try{
+    //  model = torch::jit::load(model_file);
+    //  model.eval();
+    //}
+    //catch (const c10::Error &e){
+    //  std::cout << "error loading the model:\n " << e.what();
+    //};
+    //
     //labels
-    nlohmann::json labels;
-    std::ifstream i_labels(labels_file);
-    i_labels >> labels;
-
+    //nlohmann::json labels;
+    //std::ifstream i_labels(labels_file);
+    //i_labels >> labels;
+    //
     //tokenizer
-    nlp::FullTokenizer * tokenizer = new nlp::FullTokenizer(vocab_file.c_str(), true);
+    //nlp::FullTokenizer * tokenizer = new nlp::FullTokenizer(vocab_file.c_str(), true);
 
-    this->key_to_model_group_map_[key] = new ModelGroup(model, labels, tokenizer);
+    this->key_to_model_group_map_[key] = new ModelGroup(model_file, labels_file, vocab_file);
   }
 };
 
@@ -111,6 +130,7 @@ std::pair<std::string, float> BasicIntent::predict(const std::string & key, cons
     key_to_model_group_item->second->tokenizer_->tokenize(text.c_str(), &tokens, 128);
 
     uint64_t ids[tokens.size()];
+    //auto ids = new uint64_t[tokens.size()];
     key_to_model_group_item->second->tokenizer_->convert_tokens_to_ids(tokens, ids);
 
     std::vector<uint64_t> input_ids;
@@ -121,6 +141,7 @@ std::pair<std::string, float> BasicIntent::predict(const std::string & key, cons
     for (std::size_t i = 0; i < tokens.size(); ++i) {
       input_ids.push_back(ids[i]);
     };
+    //delete ids;
     while (input_ids.size() < 4) {
       input_ids.push_back(0);
     };

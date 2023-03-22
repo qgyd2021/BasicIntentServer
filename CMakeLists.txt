@@ -13,8 +13,8 @@ set(CMAKE_BUILD_TYPE Debug)
 
 include(FetchContent)
 set(FETCHCONTENT_QUIET OFF)
-get_filename_component(fc_base "fc_base" REALPATH BASE_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
-set(FETCHCONTENT_BASE_DIR ${fc_base})
+get_filename_component(thirdparty "thirdparty" REALPATH BASE_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
+set(FETCHCONTENT_BASE_DIR ${thirdparty})
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
 if(NOT MSVC)
