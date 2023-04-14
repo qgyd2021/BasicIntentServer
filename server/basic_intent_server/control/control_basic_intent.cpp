@@ -39,6 +39,7 @@ public:
 };
 
 
+//curl -X POST http://127.0.0.1:13074/BasicIntent -d '{"key": "chinese", "text": "C++的BERT分词器实现"}'
 //curl -X POST http://127.0.0.1:80/BasicIntent -d '{"key": "chinese", "text": "C++的BERT分词器实现"}'
 //curl -X POST http://127.0.0.1:80/BasicIntent -d '{"key": "zh-CN2", "text": "C++的BERT分词器实现"}'
 std::function<void(const httplib::Request &, httplib::Response &)> BasicIntent(){
@@ -67,7 +68,9 @@ std::function<void(const httplib::Request &, httplib::Response &)> BasicIntent()
     };
 
     //逻辑
+    std::cout << "before getBasicIntentService" << std::endl;
     BasicIntentService * basicIntentService = getBasicIntentService();
+    std::cout << "after getBasicIntentService" << std::endl;
     std::pair<std::string, float> item = basicIntentService->predict(requestObject.key, requestObject.text);
     std::string label = item.first;
     float prob = item.second;
