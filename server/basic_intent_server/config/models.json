@@ -2,16 +2,13 @@
     {
         "key": "chinese",
         "model_path": "models/basic_intent_cn_20230414",
-        "vocab_file": "pretrained/chinese-bert-wwm-ext/vocab.txt"
     },
     {
         "key": "japanese",
         "model_path": "models/basic_intent_jp_20230414",
-        "vocab_file": "pretrained/bert-base-japanese/vocab.txt"
     },
     {
         "key": "vietnamese",
         "model_path": "models/basic_intent_vi_20230414",
-        "vocab_file": "pretrained/bert-base-vietnamese-uncased/vocab.txt"
     }
 ]
