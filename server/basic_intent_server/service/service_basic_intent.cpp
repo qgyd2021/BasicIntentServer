@@ -72,7 +72,7 @@ BasicIntentService::BasicIntentService()
     std::string model_path = model_json["model_path"];
     std::string vocab_file = model_json["vocab_file"];
 
-    std::string model_file = model_path + "/model.pth";
+    std::string model_file = model_path + "/final.zip";
     std::string labels_file = model_path + "/labels.json";
 
     this->key_to_model_group_map_[key] = new ModelGroup(model_file, labels_file, vocab_file);
