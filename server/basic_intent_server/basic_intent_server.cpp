@@ -8,8 +8,8 @@
 
 #include <string>
 
-#include <gflags/gflags.h>
 #include <glog/logging.h>
+#include <gflags/gflags.h>
 #include <torch/script.h>
 #include <httplib.h>
 
@@ -24,8 +24,8 @@
 int BasicIntentServer(int argc, char *argv[])
 {
   ////初始化日志和启动参数组件
-  //gflags::ParseCommandLineFlags(&argc, &argv, true);
-  //google::InitGoogleLogging(argv[0]);
+  gflags::ParseCommandLineFlags(&argc, &argv, false);
+  google::InitGoogleLogging(argv[0]);
 
   // HTTP
   httplib::Server svr;
