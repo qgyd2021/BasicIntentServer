@@ -9,6 +9,7 @@
 #include <tuple>
 
 #include <glog/logging.h>
+#include <nlohmann/json.hpp>
 #include <torch/script.h>
 #include <torch/torch.h>
 
