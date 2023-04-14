@@ -5,6 +5,7 @@
 #ifndef SERVER_BASIC_INTENT_SERVER_SERVICE_BASIC_INTENT_H
 #define SERVER_BASIC_INTENT_SERVER_SERVICE_BASIC_INTENT_H
 
+#include <iostream>
 #include <map>
 #include <tuple>
 
@@ -60,6 +61,7 @@ ModelGroup::~ModelGroup() {
 BasicIntentService::BasicIntentService()
 {
   nlohmann::json models_json;
+
   std::cout << FLAGS_models_json << std::endl;
   exit(0);
   std::ifstream i_models_json(FLAGS_models_json);
