@@ -10,5 +10,9 @@
     {
         "key": "vietnamese",
         "model_path": "models/basic_intent_vi_20230414",
+    },
+    {
+        "key": "english",
+        "model_path": "models/basic_intent_en_20230414",
     }
 ]
