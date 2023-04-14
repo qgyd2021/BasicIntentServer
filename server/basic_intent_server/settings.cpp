@@ -1,7 +1,6 @@
 //
 // Created by tianx on 2023/4/14.
 //
-#pragma once
 #include <iostream>
 
 #include <gflags/gflags.h>
