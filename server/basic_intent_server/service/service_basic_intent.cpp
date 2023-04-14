@@ -20,42 +20,37 @@
 #include "service_basic_intent.h"
 
 
-class ModelGroup {
-public:
-  torch::jit::script::Module model_;
-  nlohmann::json labels_;
-  nlp::FullTokenizer * tokenizer_;
+ModelGroup::ModelGroup(
+    torch::jit::script::Module model,
+    nlohmann::json labels,
+    nlp::FullTokenizer * tokenizer
+): model_(model), labels_(labels), tokenizer_(tokenizer) {}
 
-  ModelGroup(
-      torch::jit::script::Module model,
-      nlohmann::json labels,
-      nlp::FullTokenizer * tokenizer
-  ): model_(model), labels_(labels), tokenizer_(tokenizer) {}
 
-  ModelGroup(std::string model_file, std::string labels_file, std::string vocab_file) {
-    //model
-    try{
-      model_ = torch::jit::load(model_file);
-      model_.eval();
-    }
-    catch (const c10::Error &e){
-      std::cout << "error loading the model:\n " << e.what();
-    };
-
-    //labels
-    std::ifstream i_labels(labels_file);
-    i_labels >> labels_;
-
-    //tokenizer
-    tokenizer_ = new nlp::FullTokenizer(vocab_file.c_str(), true);
-
+ModelGroup::ModelGroup(std::string model_file, std::string labels_file, std::string vocab_file) {
+  //model
+  try{
+    model_ = torch::jit::load(model_file);
+    model_.eval();
+  }
+  catch (const c10::Error &e){
+    std::cout << "error loading the model:\n " << e.what();
   };
 
-  ~ModelGroup() {
-    delete tokenizer_;
-    tokenizer_ = nullptr;
-  }
-};
+  //labels
+  std::ifstream i_labels(labels_file);
+  i_labels >> labels_;
+
+  //tokenizer
+  tokenizer_ = new nlp::FullTokenizer(vocab_file.c_str(), true);
+
+}
+
+
+ModelGroup::~ModelGroup() {
+  delete tokenizer_;
+  tokenizer_ = nullptr;
+}
 
 
 BasicIntentService::BasicIntentService()
