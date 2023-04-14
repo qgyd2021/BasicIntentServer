@@ -75,10 +75,6 @@ BasicIntentService::BasicIntentService()
     std::string labels_file = model_path + "/labels.json";
     std::string vocab_file = model_path + "/vocab.txt";
 
-    std::cout << model_file << std::endl;
-    std::cout << labels_file << std::endl;
-    std::cout << vocab_file << std::endl;
-
     this->key_to_model_group_map_[key] = new ModelGroup(model_file, labels_file, vocab_file);
   }
 };
