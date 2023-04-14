@@ -44,6 +44,7 @@ include_directories(
 
 # 编辑
 file(GLOB SERVER_SRC "${CMAKE_CURRENT_SOURCE_DIR}/server/**/*.cpp")
+message(${SERVER_SRC})
 add_executable(BasicIntentServer main.cpp ${SERVER_SRC})
 target_link_libraries(BasicIntentServer gflags)
 target_link_libraries(BasicIntentServer glog::glog)
