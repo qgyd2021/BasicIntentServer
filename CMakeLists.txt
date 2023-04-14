@@ -31,6 +31,7 @@ include(gflags)
 include(glog)
 include(libtorch)
 
+# 以下库, 只需要 include, 不需要 link.
 include(nlohmann_json)
 include(httplib)
 
@@ -38,14 +39,16 @@ include(httplib)
 
 # 自定义库
 add_subdirectory(toolbox/nlp)
+
+# include 目录
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
 # 编辑
 file(GLOB_RECURSE SERVER_SRC "${CMAKE_CURRENT_SOURCE_DIR}/server/**/*.cpp")
-message(${SERVER_SRC})
 add_executable(BasicIntentServer main.cpp ${SERVER_SRC})
+
 target_link_libraries(BasicIntentServer gflags)
 target_link_libraries(BasicIntentServer glog::glog)
 target_link_libraries(BasicIntentServer "${TORCH_LIBRARIES}")
