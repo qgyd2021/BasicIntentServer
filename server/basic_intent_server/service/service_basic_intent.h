@@ -53,4 +53,7 @@ public:
 };
 
 
+BasicIntentService getBasicIntentService();
+
+
 #endif //SERVICE_BASIC_INTENT_H
