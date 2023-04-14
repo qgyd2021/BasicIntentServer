@@ -6,8 +6,6 @@
 //#define C10_USE_GLOG
 //#define CPPHTTPLIB_THREAD_POOL_COUNT 24
 
-#include "basic_intent_server.h"
-
 #include <string>
 
 #include <gflags/gflags.h>
@@ -15,9 +13,13 @@
 #include <torch/script.h>
 #include <httplib.h>
 
-#include "control/control_heart_beat.h"
 #include "control/control_basic_intent.h"
+#include "control/control_heart_beat.h"
+
 #include "settings.h"
+
+#include "basic_intent_server.h"
+
 
 int BasicIntentServer(int argc, char *argv[])
 {
