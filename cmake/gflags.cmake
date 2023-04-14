@@ -5,4 +5,3 @@ FetchContent_Declare(gflags
 )
 FetchContent_MakeAvailable(gflags)
 include_directories(${gflags_BINARY_DIR}/include)
-set(gflags_DIR ${gflags_BINARY_DIR})
