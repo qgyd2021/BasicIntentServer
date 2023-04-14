@@ -5,6 +5,7 @@
 #ifndef CONTROL_BASIC_INTENT_H
 #define CONTROL_BASIC_INTENT_H
 
+#include "../service/service_basic_intent.h"
 
 BasicIntentService basicIntentService;
 
