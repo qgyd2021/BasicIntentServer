@@ -67,8 +67,8 @@ std::function<void(const httplib::Request &, httplib::Response &)> BasicIntent()
     };
 
     //逻辑
-    auto basicIntentService = getBasicIntentService();
-    std::pair<std::string, float> item = basicIntentService.predict(requestObject.key, requestObject.text);
+    BasicIntentService * basicIntentService = getBasicIntentService();
+    std::pair<std::string, float> item = basicIntentService->predict(requestObject.key, requestObject.text);
     std::string label = item.first;
     float prob = item.second;
 

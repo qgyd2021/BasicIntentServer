@@ -145,11 +145,11 @@ std::pair<std::string, float> BasicIntentService::predict(const std::string & ke
 BasicIntentService * basicIntentService = nullptr;
 
 
-BasicIntentService getBasicIntentService() {
+BasicIntentService * getBasicIntentService() {
   if (basicIntentService == nullptr) {
     basicIntentService = new BasicIntentService();
   }
-  return basicIntentService
+  return basicIntentService;
 }
 
 #endif //SERVER_BASIC_INTENT_SERVER_SERVICE_BASIC_INTENT_H
