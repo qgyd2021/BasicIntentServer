@@ -1,6 +1,6 @@
 [
     {
-        "key": "zh-CN",
+        "key": "chinese",
         "model_path": "models/intent_cn_20221208",
         "vocab_file": "pretrained/chinese-bert-wwm-ext/vocab.txt"
     }

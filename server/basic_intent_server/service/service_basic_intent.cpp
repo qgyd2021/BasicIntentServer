@@ -39,6 +39,10 @@ ModelGroup::ModelGroup(std::string model_file, std::string labels_file, std::str
 
   //labels
   std::ifstream i_labels(labels_file);
+  if (! i_labels.is_open()) {
+    std::cout << "fail to open file\n" << labels_file;
+    exit(0);
+  }
   i_labels >> labels_;
 
   //tokenizer
