@@ -16,6 +16,8 @@
 
 #include "../settings.h"
 
+#include "service_basic_intent.h"
+
 
 class ModelGroup {
 public:
@@ -27,7 +29,7 @@ public:
       torch::jit::script::Module model,
       nlohmann::json labels,
       nlp::FullTokenizer * tokenizer
-      ): model_(model), labels_(labels), tokenizer_(tokenizer) {}
+  ): model_(model), labels_(labels), tokenizer_(tokenizer) {}
 
   ModelGroup(std::string model_file, std::string labels_file, std::string vocab_file) {
     //model
@@ -55,23 +57,6 @@ public:
 };
 
 
-class BasicIntent {
-public:
-  //模型
-  std::map<std::string, ModelGroup *> key_to_model_group_map_;
-
-  //构造函数
-  BasicIntent();
-
-  //析构函数
-  ~BasicIntent();
-
-  //
-  std::pair<std::string, float> predict(const std::string & key, const std::string & text);
-
-};
-
-
 BasicIntent::BasicIntent()
 {
   nlohmann::json models_json;
@@ -84,24 +69,6 @@ BasicIntent::BasicIntent()
 
     std::string model_file = model_path + "/model.pth";
     std::string labels_file = model_path + "/labels.json";
-
-    //model
-    //torch::jit::script::Module model;
-    //try{
-    //  model = torch::jit::load(model_file);
-    //  model.eval();
-    //}
-    //catch (const c10::Error &e){
-    //  std::cout << "error loading the model:\n " << e.what();
-    //};
-    //
-    //labels
-    //nlohmann::json labels;
-    //std::ifstream i_labels(labels_file);
-    //i_labels >> labels;
-    //
-    //tokenizer
-    //nlp::FullTokenizer * tokenizer = new nlp::FullTokenizer(vocab_file.c_str(), true);
 
     this->key_to_model_group_map_[key] = new ModelGroup(model_file, labels_file, vocab_file);
   }
@@ -135,9 +102,7 @@ std::pair<std::string, float> BasicIntent::predict(const std::string & key, cons
 
     std::vector<uint64_t> input_ids;
     input_ids.push_back(102);
-    //for (auto id: ids) {
-    //  input_ids.push_back(id);
-    //};
+
     for (std::size_t i = 0; i < tokens.size(); ++i) {
       input_ids.push_back(ids[i]);
     };

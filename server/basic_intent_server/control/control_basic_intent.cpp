@@ -1,13 +1,10 @@
 //
 // Created by tianx on 2022/12/8.
 //
-
-#ifndef SERVER_BASIC_INTENT_SERVER_CONTROL_BASIC_INTENT_H
-#define SERVER_BASIC_INTENT_SERVER_CONTROL_BASIC_INTENT_H
-
 #include <chrono>
 
-#include "../service/basic_intent.h"
+#include "../service/service_basic_intent.h"
+#include "control_basic_intent.h"
 
 using json = nlohmann::json;
 
@@ -90,6 +87,3 @@ std::function<void(const httplib::Request &, httplib::Response &)> BasicIntent()
     response.set_content(responseText, "application/json");
   };
 };
-
-
-#endif //SERVER_BASIC_INTENT_SERVER_CONTROL_BASIC_INTENT_H

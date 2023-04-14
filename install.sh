@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# docker run --name BasicIntentServer -itd daocloud.io/centos:7 /bin/bash
+
 yum install -y bzip2 gdb git lrzsz wget vim
 
 mkdir -p /data/tianxing/CLionProjects/BasicIntentServer/
