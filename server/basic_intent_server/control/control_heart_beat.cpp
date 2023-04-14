@@ -6,6 +6,7 @@
 #include <iostream>
 #include <sstream>
 
+#include <httplib.h>
 #include <nlohmann/json.hpp>
 
 #include "control_heart_beat.h"

@@ -3,6 +3,9 @@
 //
 #include <chrono>
 
+#include <httplib.h>
+#include <nlohmann/json.hpp>
+
 #include "../service/service_basic_intent.h"
 #include "control_basic_intent.h"
 
