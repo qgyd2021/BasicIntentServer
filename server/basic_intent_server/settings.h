@@ -11,9 +11,6 @@ DECLARE_string(project_name);
 DECLARE_string(http_host);
 DECLARE_uint32(http_port);
 
-DECLARE_string(model_path);
-DECLARE_string(vocab_file);
-
 DECLARE_string(models_json);
 
 

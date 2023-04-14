@@ -32,7 +32,7 @@ gdb -c ./cmake-build-debug/BasicIntentServer
 yum install -y gdb
 
 查看 core 文件
-gdb -c core.31840 ./cmake-build-debug/BasicIntentServer
+gdb -c core.31925 ./cmake-build-debug/BasicIntentServer
 
 where
 
