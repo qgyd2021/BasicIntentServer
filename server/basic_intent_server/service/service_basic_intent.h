@@ -55,16 +55,16 @@ public:
 };
 
 
-class BasicIntent {
+class BasicIntentService {
 public:
   //模型
   std::map<std::string, ModelGroup *> key_to_model_group_map_;
 
   //构造函数
-  BasicIntent();
+  BasicIntentService();
 
   //析构函数
-  ~BasicIntent();
+  ~BasicIntentService();
 
   //
   std::pair<std::string, float> predict(const std::string & key, const std::string & text);

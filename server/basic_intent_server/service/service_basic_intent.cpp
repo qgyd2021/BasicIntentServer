@@ -57,7 +57,7 @@ public:
 };
 
 
-BasicIntent::BasicIntent()
+BasicIntentService::BasicIntentService()
 {
   nlohmann::json models_json;
   std::ifstream i_models_json(FLAGS_models_json);
@@ -75,7 +75,7 @@ BasicIntent::BasicIntent()
 };
 
 
-BasicIntent::~BasicIntent() {
+BasicIntentService::~BasicIntentService() {
   for (auto it = key_to_model_group_map_.begin(); it != key_to_model_group_map_.end(); ++it) {
     delete it->second;
     it->second = nullptr;
@@ -83,7 +83,7 @@ BasicIntent::~BasicIntent() {
 }
 
 
-std::pair<std::string, float> BasicIntent::predict(const std::string & key, const std::string &text)
+std::pair<std::string, float> BasicIntentService::predict(const std::string & key, const std::string &text)
 {
   std::pair<std::string, float> result;
 
