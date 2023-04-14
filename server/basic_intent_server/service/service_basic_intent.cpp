@@ -61,7 +61,7 @@ ModelGroup::~ModelGroup() {
 BasicIntentService::BasicIntentService()
 {
   nlohmann::json models_json;
-
+  std::cout << "FLAGS_models_json" << std::endl;
   std::cout << FLAGS_models_json << std::endl;
   exit(0);
   std::ifstream i_models_json(FLAGS_models_json);
