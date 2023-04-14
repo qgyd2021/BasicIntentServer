@@ -26,6 +26,8 @@ int BasicIntentServer(int argc, char *argv[])
   ////初始化日志和启动参数组件
   gflags::ParseCommandLineFlags(&argc, &argv, true);
   google::InitGoogleLogging(argv[0]);
+  FLAGS_log_dir = FLAGS_basic_intent_log_dir;
+  FLAGS_stderrthreshold = basic_intent_stderrthreshold;
 
   // HTTP
   httplib::Server svr;

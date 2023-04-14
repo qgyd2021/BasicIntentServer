@@ -13,8 +13,8 @@ DECLARE_uint32(http_port);
 
 DECLARE_string(models_json);
 
-DECLARE_string(log_dir);
-DECLARE_string(stderrthreshold);
+DECLARE_string(basic_intent_log_dir);
+DECLARE_string(basic_intent_stderrthreshold);
 
 
 #endif //SERVER_BASIC_INTENT_SERVER_SETTINGS_H
