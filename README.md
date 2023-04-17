@@ -1,29 +1,45 @@
 ## 意图识别
 
 
+### 服务布署
+
 ```text
 
-# 拉取代码
+# 创建容器
+docker run --name BasicIntentServer -itd -p 13070:13070 daocloud.io/centos:7 /bin/bash
+
+# 安装环境
+# ./install.sh
+yum install -y bzip2 gdb git lrzsz wget vim
+
+mkdir -p /data/tianxing/CLionProjects/
+cd /data/tianxing/CLionProjects/ || exit 1;
+
+
+# 拉代码
+git clone https://gitee.com/qgyd2021/BasicIntentServer.git
+
+
+# 更新代码
 git reset --hard origin/master
 git pull origin master
 
 
-git bash
-mkdir build && cd build && cmake .. && cmake --build .
+# cmake, gcc 安装
+cd BasicIntentServer
+nohup sh install.sh &
 
 
-
+# cmake 编译
 mkdir cmake-build-debug/
 cmake -B cmake-build-debug/
 
-
-cmake --build ./cmake-build-debug --target BasicIntentServer -j 4
 cmake --build ./cmake-build-debug --target BasicIntentServer -j "$(grep -c ^processor /proc/cpuinfo)"
 
 ./cmake-build-debug/BasicIntentServer
 
 
-
+# bug 调试
 
 gdb -c ./cmake-build-debug/BasicIntentServer
 
