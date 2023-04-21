@@ -2,9 +2,6 @@
 // Created by tianx on 2022/12/8.
 //
 
-#ifndef SERVER_BASIC_INTENT_SERVER_SERVICE_BASIC_INTENT_H
-#define SERVER_BASIC_INTENT_SERVER_SERVICE_BASIC_INTENT_H
-
 #include <iostream>
 #include <map>
 #include <tuple>
@@ -151,5 +148,3 @@ BasicIntentService * getBasicIntentService() {
   }
   return basicIntentService;
 }
-
-#endif //SERVER_BASIC_INTENT_SERVER_SERVICE_BASIC_INTENT_H

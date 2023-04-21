@@ -49,7 +49,6 @@ std::function<void(const httplib::Request &, httplib::Response &)> HeartBeat(){
     //请求体创建
     try
     {
-      LOG(INFO) << "request body: " << request.body;
       json requestJson = json::parse(request.body); //将字符串转为json对象
       requestObject = requestJson.get<HeartBeatRequest>(); //将json对象转为定义好的请求体
     }
@@ -76,7 +75,7 @@ std::function<void(const httplib::Request &, httplib::Response &)> HeartBeat(){
     json responseJson = responseObject;
     std::string responseText = responseJson.dump();
 
-    LOG(INFO) << "response body: " << responseText;
+    LOG(INFO) << "request body: " << request.body << ", response body: " << responseText;
     response.set_content(responseText, "application/json");
   };
 }

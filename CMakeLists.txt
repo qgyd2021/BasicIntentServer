@@ -13,9 +13,9 @@ set(CMAKE_BUILD_TYPE Debug)
 
 include(FetchContent)
 set(FETCHCONTENT_QUIET OFF)
-get_filename_component(thirdparty "thirdparty" REALPATH BASE_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
+get_filename_component(thirdparty "${CMAKE_SOURCE_DIR}/thirdparty" REALPATH BASE_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
 set(FETCHCONTENT_BASE_DIR ${thirdparty})
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 
 if(NOT MSVC)
     # Keep the same with openfst, -fPIC or -fpic
