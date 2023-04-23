@@ -5,6 +5,7 @@
 
 # 参数:
 system_version="centos";
+gcc_version=11.1.0;
 
 # parse options
 while true; do
@@ -39,16 +40,16 @@ echo "system_version: ${system_version}";
 
 if [ ${system_version} = "centos" ]; then
 
-  yum install -y wget unzip
+  yum install -y bzip2 git wget which lrzsz tmux zip unzip
 
   mkdir -p /data/dep
   # https://github.com/gcc-mirror/gcc/tags
-  wget -P /data/dep https://github.com/gcc-mirror/gcc/archive/refs/tags/releases/gcc-11.1.0.zip
+  wget -P /data/dep https://github.com/gcc-mirror/gcc/archive/refs/tags/releases/gcc-${gcc_version}.zip
 
   cd -P /data/dep || exit 1;
-  unzip gcc-11.1.0.zip
+  unzip gcc-${gcc_version}.zip
 
-  cd gcc-releases-gcc-11.1.0/ || exit 1;
+  cd gcc-releases-gcc-${gcc_version}/ || exit 1;
 
   ./contrib/download_prerequisites
 
@@ -111,4 +112,5 @@ if [ ${system_version} = "centos" ]; then
   # 安装
   make -j "${THREADS}"
   make install -j "${THREADS}"
+
 fi
