@@ -1,0 +1,18 @@
+[
+    {
+        "key": "chinese",
+        "model_path": "trained_models/basic_intent_cn_20230414"
+    },
+    {
+        "key": "japanese",
+        "model_path": "trained_models/basic_intent_jp_20230414"
+    },
+    {
+        "key": "vietnamese",
+        "model_path": "trained_models/basic_intent_vi_20230414"
+    },
+    {
+        "key": "english",
+        "model_path": "trained_models/basic_intent_en_20230414"
+    }
+]
