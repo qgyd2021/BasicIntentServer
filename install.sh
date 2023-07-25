@@ -2,6 +2,7 @@
 
 # docker run --name BasicIntentServer -itd -p 13070:13070 daocloud.io/centos:7 /bin/bash
 
+# sh install.sh --stage -1 --stop_stage -1
 
 gcc_version=11.1.0
 system_version=centos
