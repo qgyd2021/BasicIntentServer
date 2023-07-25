@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
-# docker run --name BasicIntentServer -itd -p 13070:13070 daocloud.io/centos:7 /bin/bash
+# sh install.sh --stage -1 --stop_stage -1 --system_version centos
 
-# sh install.sh --stage -1 --stop_stage -1
 
 gcc_version=11.1.0
 system_version=centos
@@ -51,17 +50,18 @@ if [ ${stage} -le -1 ] && [ ${stop_stage} -ge -1 ]; then
   $verbose && echo "stage -1: download models"
   cd "${work_dir}" || exit 1;
 
-  mkdir trained_models && cd trained_models || exit 1;
+  mkdir -p trained_models
+  cd trained_models || exit 1;
 
   for model_name in basic_intent_cn_20230414 basic_intent_en_20230414 basic_intent_jp_20230414 basic_intent_vi_20230414
   do
-  wget -c "https://huggingface.co/qgyd2021/basic_intent_models/resolve/main/${model_name}.zip"
-  unzip "${model_name}.zip"
-  rm "${model_name}.zip"
-  rm -rf "${model_name}/*.ckpt"
-  rm "${model_name}/pytorch_model.bin"
-  rm "${model_name}/test_output.xlsx"
-  rm -rf "${model_name}/vocabulary"
+    wget -c "https://huggingface.co/qgyd2021/basic_intent_models/resolve/main/${model_name}.zip"
+    unzip "${model_name}.zip"
+    rm "${model_name}.zip"
+    rm -rf "${model_name}/*.ckpt"
+    rm "${model_name}/pytorch_model.bin"
+    rm "${model_name}/test_output.xlsx"
+    rm -rf "${model_name}/vocabulary"
   done
 fi
 
