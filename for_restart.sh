@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
+# nohup sh for_restart.sh --http_port 13070 --build_dir build > nohup.out &
+
 
 http_port=13070
 build_dir="build"
-
 
 # parse options
 while true; do
@@ -34,14 +35,25 @@ while true; do
   esac
 done
 
+work_dir=$(pwd)
+chmod 777 "${work_dir}/start.sh"
 
-rm -rf nohup.out
-rm -rf logs/
-mkdir -p logs/
+LOG=/var/log/BasicIntentServer.log
+rm -rf $LOG
 
-nohup \
-./${build_dir}/BasicIntentServer \
---http_port ${http_port} \
---basic_intent_stderrthreshold=0 \
---basic_intent_log_dir=./logs/ \
-> nohup.out &
+while true
+do
+  # ps -ef | grep "build/BasicIntentServer" | grep -v grep |wc -l
+  PT=$(ps -ef | grep "${build_dir}/BasicIntentServer" | grep -v grep |wc -l)
+
+  if [ "$PT" -ge 1 ]; then
+    echo -e "$(date "+%Y-%m-%d %H:%M:%S.%N")  BasicIntentServer is running, do nothing ..." >>$LOG
+  else
+    echo -e "$(date "+%Y-%m-%d %H:%M:%S.%N")  BasicIntentServer is not running, starting the BasicIntentServer now ..." >>$LOG
+
+    sh "${work_dir}/start.sh" --build_dir ${build_dir} --http_port ${http_port}
+
+  fi
+  sleep 10s
+
+done

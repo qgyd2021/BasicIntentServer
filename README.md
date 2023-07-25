@@ -1,63 +1,81 @@
 ## 意图识别
 
+通话场景中用于识别用户意图, 此是对 TorchScript 模型的部署. 
 
-### 服务布署
+### 基础环境
 
 ```text
+system==centos:v7
 
-# 创建容器
-docker run --name BasicIntentServer -itd -p 13070:13070 daocloud.io/centos:7 /bin/bash
-
-# 安装环境
-# ./install.sh
-yum install -y bzip2 gdb git lrzsz wget vim
-
-mkdir -p /data/tianxing/CLionProjects/
-cd /data/tianxing/CLionProjects/ || exit 1;
+python==3.8.10
+cmake==3.25.0
+gcc==11.1.0
+```
 
 
-# 拉代码
-git clone https://gitee.com/qgyd2021/BasicIntentServer.git
+### 安装步骤 - linux 平台
+
+```text
+sh install.sh --stage -1 --stop_stage 2 --system_version centos
+```
+此过程依次执行: 
+1. 下载模型文件. 
+2. 安装 cmake
+3. 安装 gcc
+4. 安装 gdb 调试工具
 
 
-# 更新代码
-git reset --hard origin/master
-git pull origin master
+```text
+cmake -B build
+```
+1. 构建 cmake. 
+
+```text
+sh build.sh --system_version centos
+```
+1. 编译. 
+
+```text
+sh start.sh --http_port 13070 --build_dir build
+```
+1. 启动服务. 
+
+```text
+sh for_restart.sh --http_port 13070 --build_dir build
+```
+1. for_restart.sh 脚本是在服务挂掉之后自动拉起. 
 
 
-# cmake, gcc 安装
-cd BasicIntentServer
-nohup sh install.sh &
+### 从 Docker 容器启动
+
+```text
+docker run -itd \
+--name BasicIntentServer \
+-p 13070:13070 \
+daocloud.io/centos:7 \
+/bin/bash
+```
 
 
-# cmake 编译
-mkdir cmake-build-debug/
-cmake -B cmake-build-debug/
+### 备注
 
-cmake --build ./cmake-build-debug --target BasicIntentServer -j "$(grep -c ^processor /proc/cpuinfo)"
+上传和下载镜像
+```text
+bash /data/tianxing/images/transfer_nx.sh push cmake_gcc_py38:v1
+bash /data/tianxing/images/transfer_img.sh pull nxtele-docker.pkg.coding.net/ops/callbot-generic/cmake_gcc_py38:v1
 
-./cmake-build-debug/BasicIntentServer
+sh /data/tianxing/images/transfer_nx.sh push callmonitor:v20230515_1002
+bash /data/tianxing/images/transfer_img.sh pull nxtele-docker.pkg.coding.net/ops/callbot-generic/callmonitor:v20230515_1002
 
+```
 
-# bug 调试
+启动容器 从 cmake_gcc_py38:v1 镜像布署服务, 这样可以避免 cmake, gcc, python 几个工具的下载和编译耗时太长.
 
-gdb -c ./cmake-build-debug/BasicIntentServer
-
-
-安装 gdb
-yum install -y gdb
-
-查看 core 文件
-gdb -c core.32193 ./cmake-build-debug/BasicIntentServer
-
-where
-
-备注: 
-通过 CMakeLists.txt 控制 Debug 或 Release 模式, 
-Debug 模式, 使用 gdb 可以看到异常的详细信息. 
-set(CMAKE_BUILD_TYPE Debug)
-#set(CMAKE_BUILD_TYPE Release)
-
-
+```text
+docker run -itd \
+--name BasicIntentServer \
+-p 13070:13070 \
+nxtele-docker.pkg.coding.net/ops/callbot-generic/cmake_gcc_py38:v1 \
+/bin/bash
 
 ```

@@ -80,3 +80,16 @@ if [ ${stage} -le 1 ] && [ ${stop_stage} -ge 1 ]; then
 
   sh ./script/install_gcc.sh --gcc_version "${gcc_version}" --system_version "${system_version}"
 fi
+
+
+if [ ${stage} -le 2 ] && [ ${stop_stage} -ge 2 ]; then
+  yum install -y gdb
+
+  debuginfo-install -y glibc-2.17-326.el7_9.x86_64
+
+  # vim /root/.gdbinit
+  # add-auto-load-safe-path /usr/lib64/libstdc++.so.6.0.29-gdb.py
+  # set auto-load safe-path /
+  echo -e "add-auto-load-safe-path /usr/lib64/libstdc++.so.6.0.29-gdb.py\nset auto-load safe-path /" > /root/.gdbinit
+
+fi
