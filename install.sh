@@ -55,7 +55,7 @@ if [ ${stage} -le -1 ] && [ ${stop_stage} -ge -1 ]; then
 
   for model_name in basic_intent_cn_20230414 basic_intent_en_20230414 basic_intent_jp_20230414 basic_intent_vi_20230414
   do
-    if [ ! -d basic_intent_cn_20230414 ]; then
+    if [ ! -d "${model_name}" ]; then
       wget -c "https://huggingface.co/qgyd2021/basic_intent_models/resolve/main/${model_name}.zip"
       unzip "${model_name}.zip"
       rm "${model_name}.zip"
