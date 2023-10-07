@@ -3,10 +3,12 @@
 # MSVC cmake.
 # sh build.sh --stage 0 --stop_stage 0
 
+system_version=windows;
 verbose=true;
 stage=0
 stop_stage=0
 
+work_dir="$(pwd)"
 
 # parse options
 while true; do
@@ -37,15 +39,16 @@ while true; do
   esac
 done
 
-work_dir="$(pwd)"
-
 
 if [ ${stage} -le 0 ] && [ ${stop_stage} -ge 0 ]; then
   $verbose && echo "stage 0: build"
   cd "${work_dir}" || exit 1;
 
+  # cmake -B build
   cmake --build ./build --target BasicIntentServer -j "$(grep -c ^processor /proc/cpuinfo)"
 
-  # cp ./build/Debug/BasicIntentServer.exe ./build/CallMonitor.exe
+  if [ "${system_version}" == "windows" ]; then
+    cp ./build/Debug/BasicIntentServer.exe ./build/BasicIntentServer.exe
+  fi
   echo "run './build/BasicIntentServer' to test. "
 fi
