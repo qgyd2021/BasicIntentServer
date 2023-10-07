@@ -44,7 +44,7 @@ if [ ${stage} -le 0 ] && [ ${stop_stage} -ge 0 ]; then
   $verbose && echo "stage 0: build"
   cd "${work_dir}" || exit 1;
 
-  cmake --build ./build --target CallMonitor -j "$(grep -c ^processor /proc/cpuinfo)"
+  cmake --build ./build --target BasicIntentServer -j "$(grep -c ^processor /proc/cpuinfo)"
 
   # cp ./build/Debug/BasicIntentServer.exe ./build/CallMonitor.exe
   echo "run './build/BasicIntentServer' to test. "
